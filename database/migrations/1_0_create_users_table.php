@@ -6,20 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-   // create_usuarios_table.php
-    public function up()
+    public function up(): void
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->id('id_usuario');
-            $table->string('nombre_usuario', 50);
-            $table->string('contrasena');
-            $table->enum('tipo_usuario', ['normal', 'admin']);
-            $table->string('correo_electronico', 100);
-            $table->timestamp('fecha_registro')->useCurrent();
-            $table->enum('estado_cuenta', ['activo', 'inactivo', 'bloqueado'])->default('activo');
+            $table->id();
+            $table->string('name');
+            $table->boolean('admin_privilegies')->nullable();
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
 
@@ -44,7 +40,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('usuarios');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

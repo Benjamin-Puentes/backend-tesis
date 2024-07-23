@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\controller_disco_duro;
 use App\Http\Controllers\controller_parametros;
 //use App\Http\Controllers\controller_periferico;
-use App\Http\Controllers\controller_profile;
+use App\Http\Controllers\profile_controller;
 //use App\Http\Controllers\controller_ram;
 use App\Http\Controllers\controller_recepcion;
 
@@ -27,14 +27,14 @@ Route::middleware('auth:api')->get('/get_ventas_para_estadisticas',[controller_c
 Route::middleware('auth:api')->post('/comprar',[controller_compra::class, 'comprar']);
 Route::middleware('auth:api')->post('/get_compras_by_user_id',[controller_compra::class, 'get_compras_by_user_id']);
 Route::middleware('auth:api')->post('/get_recepcion_paginated_by_user_id',[controller_recepcion::class, 'get_recepcion_paginated_by_user_id']);
-Route::middleware('auth:api')->post('/check_login',[controller_profile::class, 'checkLogin']);
-Route::middleware('auth:api')->post('/revoke_token',[controller_profile::class, 'revoke_token']);
-Route::middleware('auth:api')->get('/direcciones',[controller_profile::class, 'get_direcciones_by_user']);
-Route::middleware('auth:api')->post('/create_direccion',[controller_profile::class, 'create_direccion']);
-Route::middleware('auth:api')->post('/delete_direccion',[controller_profile::class, 'delete_direccion']);
+Route::middleware('auth:api')->post('/check_login',[profile_controller::class, 'checkLogin']);
+Route::middleware('auth:api')->post('/revoke_token',[profile_controller::class, 'revoke_token']);
+Route::middleware('auth:api')->get('/direcciones',[profile_controller::class, 'get_direcciones_by_user']);
+Route::middleware('auth:api')->post('/create_direccion',[profile_controller::class, 'create_direccion']);
+Route::middleware('auth:api')->post('/delete_direccion',[profile_controller::class, 'delete_direccion']);
 Route::middleware('auth:api')->post('/create_recepcion',[controller_recepcion::class, 'create_recepcion']);
-Route::post('/login',[controller_profile::class, 'login']);
-Route::post('/register',[controller_profile::class, 'register']);
+Route::post('/login',[profile_controller::class, 'login']);
+Route::post('/register',[profile_controller::class, 'register']);
 Route::get('/compras',[controller_compra::class, 'compras']);
 //Route::get('/discosDuros',[controller_disco_duro::class, 'discosDurosPaginated']);
 //Route::get('/perifericos',[controller_periferico::class, 'perifericosPaginated']);
@@ -61,8 +61,6 @@ Route::get('/get_regiones',[controller_profile::class, 'get_regiones']);
 Route::get('/images/{nombreImagen}', function ($nombreImagen) {
     return response()->file(public_path('images/' . $nombreImagen));
 });
-
-Route::post('/subir-documento', [FiscalController::class, 'subirDocumento'])->name('subir.documento');
 
 Route::get('/user', function (Request $request) {
     return $request->user();

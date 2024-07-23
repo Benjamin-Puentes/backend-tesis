@@ -1,5 +1,5 @@
 <?php
-
+// app/Models/Documento.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,14 +9,7 @@ class Documento extends Model
 {
     use HasFactory;
 
-    protected $table = 'documentos';
-
     protected $fillable = [
-        'tipo_documento', 'nombre_archivo', 'tamano_archivo', 'fecha_subida', 'id_usuario', 'descripcion', 'ruta_archivo'
+        'tipo', 'numero', 'fecha', 'monto', 'archivo_pdf',
     ];
-
-    public function usuario()
-    {
-        return $this->belongsTo(Usuario::class, 'id_usuario');
-    }
 }

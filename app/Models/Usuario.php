@@ -12,7 +12,7 @@ class Usuario extends Authenticatable
     protected $table = 'usuarios';
 
     protected $fillable = [
-        'nombre_usuario', 'contrasena', 'tipo_usuario', 'correo_electronico', 'estado_cuenta'
+        'id_usuario','nombre_usuario', 'contrasena', 'tipo_usuario', 'correo_electronico', 'estado_cuenta'
     ];
 
     protected $hidden = [
@@ -21,6 +21,6 @@ class Usuario extends Authenticatable
 
     public function documentos()
     {
-        return $this->hasMany(Documento::class, 'id_usuario');
+        return $this->hasMany(Documentos::class, 'doc_id');
     }
 }

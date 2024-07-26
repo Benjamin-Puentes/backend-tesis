@@ -1,18 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Documento;
+use App\Models\Documentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use PDF;
-use Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class Documento_Controller extends Controller
 {
     public function index()
     {
-        $documentos = Documento::all();
+        $documentos = Documentos::all();
         return view('documentos.index', compact('documentos'));
     }
 
@@ -21,53 +20,65 @@ class Documento_Controller extends Controller
         return view('documentos.crear');
     }
 
+    public function upload(Request $request)
+{
+    $request->validate([
+        'archivo' => 'required|file|mimes:pdf,doc,docx,csv,xmlx',
+    ]);
+
+    $path = $request->file('archivo')->store('documentos');
+
+    return response()->json(['path' => $path]);
+}
+
+
     public function store(Request $request)
     {
         $request->validate([
             'tipo' => 'required|string',
-            'numero' => 'required|string',
+            'descripcion' => 'required|string',
             'fecha' => 'required|date',
             'monto' => 'required|numeric',
-            'archivo_pdf' => 'required|file|mimes:pdf',
+            'archivo' => 'required|file|mimes:pdf,doc,docx,csv,xmlx',
         ]);
 
-        $archivo_pdf = $request->file('archivo_pdf')->store('documentos');
+        $archivo = $request->file('archivo')->store('documentos');
 
-        Documento::crear([
+        Documentos::crear([
             'tipo' => $request->tipo,
-            'numero' => $request->numero,
+            'descripcion' => $request->descripcion,
             'fecha' => $request->fecha,
             'monto' => $request->monto,
-            'archivo_pdf' => $archivo_pdf,
+            'archivo' => $archivo,
         ]);
 
         return redirect()->route('documentos.index')->with('success', 'Documento subido con éxito.');
     }
 
-    public function show(Documento $documento)
+    public function show(Documentos $documento)
     {
         return view('documentos.show', compact('documento'));
     }
 
-    public function edit(Documento $documento)
+    public function edit(Documentos $documento)
     {
         return view('documentos.edit', compact('documento'));
     }
 
-    public function update(Request $request, Documento $documento)
+    public function update(Request $request, Documentos $documento)
     {
         $request->validate([
             'tipo' => 'required|string',
             'numero' => 'required|string',
             'fecha' => 'required|date',
             'monto' => 'required|numeric',
-            'archivo_pdf' => 'nullable|file|mimes:pdf',
+            'archivo' => 'nullable|file|mimes:pdf,doc,docx,csv,xmlx',
         ]);
 
-        if ($request->hasFile('archivo_pdf')) {
-            Storage::delete($documento->archivo_pdf);
-            $archivo_pdf = $request->file('archivo_pdf')->store('documentos');
-            $documento->archivo_pdf = $archivo_pdf;
+        if ($request->hasFile('archivo')) {
+            Storage::delete($documento->archivo);
+            $archivo = $request->file('archivo')->store('documentos');
+            $documento->archivo = $archivo;
         }
 
         $documento->update($request->all());
@@ -75,9 +86,9 @@ class Documento_Controller extends Controller
         return redirect()->route('documentos.index')->with('success', 'Documento actualizado con éxito.');
     }
 
-    public function destroy(Documento $documento)
+    public function destroy(Documentos $documento)
     {
-        Storage::delete($documento->archivo_pdf);
+        Storage::delete($documento->archivo);
         $documento->delete();
         
         return redirect()->route('documentos.index')->with('success', 'Documento eliminado con éxito.');
@@ -85,13 +96,9 @@ class Documento_Controller extends Controller
 
     public function exportPdf()
     {
-        $documentos = Documento::all();
-        $pdf = PDF::loadView('documentos.pdf', compact('documentos'));
-        return $pdf->download('documentos.pdf');
+        $documentos = Documentos::all();
+        $pdf = PDF::loadView('documento.pdf', compact('documento'));
+        return $pdf->download('documento.pdf');
     }
 
-    public function exportExcel()
-    {
-        return Excel::download(new DocumentosExport, 'documentos.xlsx');
-    }
 }

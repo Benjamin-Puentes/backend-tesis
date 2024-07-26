@@ -5,7 +5,18 @@ FROM php:8.2-apache
 WORKDIR /var/www/html
 
 # Instala las extensiones de PHP necesarias
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apt-get update
+RUN apt-get install libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libzip-dev 7z -y
+
+# Instalar extensiones PHP
+RUN docker-php-ext-install pdo pdo_mysql dom
+
+# Configurar y instalar GD
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install -j$(nproc) gd
+
+# Instalar ZIP
+RUN docker-php-ext-install zip
 
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -27,3 +38,12 @@ EXPOSE 80
 
 # Corre el servidor Apache
 CMD ["apache2-foreground"]
+
+# Configurar .env para conectar inmediatamente a la bdd
+ENV DB_CONNECTION=mysql
+ENV DB_HOST=db
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_DATABASE=tesisbenja
+ENV MYSQL_USER=sqlbenja
+ENV MYSQL_PASSWORD=sqlbenjapwd
+

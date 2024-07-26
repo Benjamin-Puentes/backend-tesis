@@ -23,12 +23,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('documentos.index') }}">Gestión de Documentos</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Flujo de Caja</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Cálculo de Sueldos</a>
-                            </li>
                             <!-- Agregar más opciones de menú aquí -->
                         </ul>
                     </div>

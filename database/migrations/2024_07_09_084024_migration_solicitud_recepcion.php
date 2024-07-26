@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('solicitud_recepcion_codigo');
             $table->string('solicitud_recepcion_descripcion')->nullable();
             $table->unsignedBigInteger('metodo_despacho_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('id_usuario');
 
             $table->foreign('metodo_despacho_id')->references('id')->on('metodo_despacho');
-            $table->foreign('user_id')->references('id')->on('usuarios');
+            $table->foreign('id_usuario')->references('id')->on('usuarios');
         });
     }
 

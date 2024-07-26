@@ -10,6 +10,6 @@ class direccion extends Model
     protected $table='direccion';
     protected $fillable = ['direccion_nombre',
         'ciudad_id',
-        'users_id'];
+        'id_usuario'];
     use HasFactory;
 }

@@ -13,9 +13,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('direccion_nombre');
             $table->unsignedBigInteger('ciudad_id');
-            $table->unsignedBigInteger('users_id')->nullable();
+            $table->unsignedBigInteger('id_usuario')->nullable();
             $table->foreign('ciudad_id')->references('id')->on('ciudad');
-            $table->foreign('users_id')->references('id')->on('usuarios');
+            $table->foreign('id_usuario')->references('id')->on('usuarios');
         });
     }
 

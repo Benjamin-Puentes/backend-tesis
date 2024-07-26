@@ -2,25 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Authenticatable
+class Usuario extends Model
 {
-    use Notifiable;
+    use HasFactory;
 
-    protected $table = 'usuarios';
+    protected $table = 'usuario';
+    protected $primaryKey = 'usuario_id';
 
     protected $fillable = [
-        'id_usuario','nombre_usuario', 'contrasena', 'tipo_usuario', 'correo_electronico', 'estado_cuenta'
+        'usuario_correo',
+        'usuario_nombre',
+        'usuario_privilegios',
+        'direccion_id',
     ];
 
-    protected $hidden = [
-        'contrasena', 'remember_token',
-    ];
-
-    public function documentos()
+    // Relaciones
+    public function direccion()
     {
-        return $this->hasMany(Documentos::class, 'doc_id');
+        return $this->belongsTo(Direccion::class, 'direccion_id');
+    }
+
+    public function herramientasSolicitudes()
+    {
+        return $this->hasMany(HerramientaSolicitud::class, 'usuario_id');
+    }
+
+    public function residuosSolicitudes()
+    {
+        return $this->hasMany(SolicitudResiduos::class, 'usuario_id');
     }
 }

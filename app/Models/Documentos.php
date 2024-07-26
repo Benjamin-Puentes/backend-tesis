@@ -10,6 +10,26 @@ class Documentos extends Model
     use HasFactory;
 
     protected $fillable = [
-        'doc_tipo', 'descripcion', 'doc_fecha', 'doc_monto', 'archivo', //archivo es la ruta en el sv
+        'doc_tipo',
+        'descripcion', 
+        'doc_fecha', 
+        'doc_monto', 
+        'archivo', //archivo es la ruta en el sv
     ];
+
+    public function compras()
+    {
+        return $this->hasMany(Compras::class, 'doc_id');
+    }
+
+    public function ventas()
+    {
+        return $this->hasMany(Ventas::class, 'doc_id');
+    }
+
+    public function residuos()
+    {
+        return $this->hasMany(SolicitudResiduos::class, 'doc_id');
+    }
+
 }

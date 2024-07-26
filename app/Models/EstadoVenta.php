@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class EstadoVenta extends Model
 {
     use HasFactory;
+
+    protected $table = 'estado_venta';
+    protected $primaryKey = 'estado_venta_id';
+
+    protected $fillable = [
+        'estado_venta_nombre',
+    ];
+
+    // Relaciones
+    public function ventas()
+    {
+        return $this->hasMany(Ventas::class, 'estado_venta_id');
+    }
 }

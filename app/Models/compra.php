@@ -5,12 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class compra extends Model
+class Compras extends Model
 {
-    protected $table='compra';
-    protected $fillable = [
-        'id_compras',
-        'doc_id'
-    ];
     use HasFactory;
+
+    protected $table = 'compras';
+    protected $primaryKey = 'compra_id';
+
+    protected $fillable = [
+        'detalles',
+        'compra_fecha',
+        'doc_id',
+    ];
+
+    // Relaciones
+    public function documento()
+    {
+        return $this->belongsTo(Documentos::class, 'doc_id');
+    }
+
 }

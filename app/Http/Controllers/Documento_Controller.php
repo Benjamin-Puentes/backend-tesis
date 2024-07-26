@@ -5,6 +5,8 @@ use App\Models\Documentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpWord\IOFactory;
 
 
 class Documento_Controller extends Controller
@@ -60,16 +62,12 @@ class Documento_Controller extends Controller
         return view('documentos.show', compact('documento'));
     }
 
-    public function edit(Documentos $documento)
-    {
-        return view('documentos.edit', compact('documento'));
-    }
 
     public function update(Request $request, Documentos $documento)
     {
         $request->validate([
             'tipo' => 'required|string',
-            'numero' => 'required|string',
+            'descripcion' => 'nullable|string',
             'fecha' => 'required|date',
             'monto' => 'required|numeric',
             'archivo' => 'nullable|file|mimes:pdf,doc,docx,csv,xmlx',

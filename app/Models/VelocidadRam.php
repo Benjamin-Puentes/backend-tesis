@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class VelocidadRam extends Model
 {
     use HasFactory;
+
+    protected $table = 'velocidad_ram';
+    protected $primaryKey = 'velocidad_ram_id';
+
+    protected $fillable = [
+        'velocidad_ram_nombre',
+    ];
+
+    // Relaciones
+    public function rams()
+    {
+        return $this->hasMany(Ram::class, 'velocidad_ram_id');
+    }
 }

@@ -5,9 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipo_periferico extends Model
+class TipoPeriferico extends Model
 {
-    protected $table='tipo_periferico';
-    protected $fillable = ['nombre_tipo_periferico'];
     use HasFactory;
+
+    protected $table = 'tipo_periferico';
+    protected $primaryKey = 'tipo_periferico_id';
+
+    protected $fillable = [
+        'tipo_periferico_nombre',
+    ];
+
+    // Relaciones
+    public function perifericos()
+    {
+        return $this->hasMany(Periferico::class, 'tipo_periferico_id');
+    }
 }

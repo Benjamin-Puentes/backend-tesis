@@ -35,21 +35,20 @@ class ventas extends Model
 
     public function metodo_pago()
     {
-        return $this->belongsTo(model_metodo_pago::class);
+        return $this->belongsTo(metodopago::class);
     }
 
     public function metodo_despacho()
     {
-        return $this->belongsTo(model_metodo_despacho::class);
+        return $this->belongsTo(metododespacho::class);
     }
     public function estado_compra()
     {
-        return $this->belongsTo(model_estado_venta::class);
+        return $this->belongsTo(estadoventa::class);
     }
-
-    public function monto()
+    public function documento()
     {
-        return $this->belongsTo(model_metodo_pago::class);
+        return $this->belongsTo(Documentos::class, 'doc_id');
     }
 
     protected $table='ventas';

@@ -7,7 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Region extends Model
 {
-    protected $table='region';
-    protected $fillable = ['region_nombre'];
     use HasFactory;
+
+    protected $table = 'region';
+    protected $primaryKey = 'region_id';
+
+    protected $fillable = [
+        'region_nombre',
+    ];
+
+    // Relaciones
+    public function provincias()
+    {
+        return $this->hasMany(Provincia::class, 'region_id');
+    }
 }

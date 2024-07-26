@@ -9,8 +9,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('documentos', function (Blueprint $table) {
+            $table->id();
             $table->string('doc_tipo');
-            $table->id('doc_id');
+            $table->string('descripcion');
             $table->date('doc_fecha');
             $table->decimal('doc_monto', 15, 2);
             $table->string('archivo');

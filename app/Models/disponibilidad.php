@@ -5,14 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class disponibilidad extends Model
+class Disponibilidad extends Model
 {
-    public function discos()
+    use HasFactory;
+
+    protected $table = 'disponibilidad';
+    protected $primaryKey = 'disponibilidad_id';
+
+    protected $fillable = [
+        'disponibilidad_nombre',
+    ];
+
+    // Relaciones
+    public function rams()
     {
-        return $this->hasMany(disco_duro::class);
+        return $this->hasMany(Ram::class, 'disponibilidad_id');
     }
 
-    protected $table='disponibilidad';
-    protected $fillable = ['disponibilidad_nombre','disponibilidad_descripcion'];
-    use HasFactory;
+    public function perifericos()
+    {
+        return $this->hasMany(Periferico::class, 'disponibilidad_id');
+    }
+    
+    public function discos()
+    {
+        return $this->hasMany(disco_duro::class, 'disponibilidad_id');
+    }
 }

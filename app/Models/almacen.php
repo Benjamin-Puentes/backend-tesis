@@ -5,9 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class almacen extends Model
+class Almacen extends Model
 {
-    protected $table='almacen';
-    protected $fillable = ['almacen_nombre','direccion_id'];
     use HasFactory;
+
+    protected $table = 'almacen';
+    protected $primaryKey = 'almacen_id';
+
+    protected $fillable = [
+        'direccion_id',
+        'ciudad_id',
+        'calle_nombre'
+    ];
+
+    // Relaciones
+    public function direccion()
+    {
+        return $this->belongsTo(Direccion::class, 'direccion_id');
+    }
+
+    public function ciudad()
+    {
+        return $this->belongsTo(Ciudad::class, 'ciudad_id');
+    }
+
 }

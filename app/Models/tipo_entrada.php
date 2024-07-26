@@ -5,14 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipo_entrada extends Model
+class TipoEntrada extends Model
 {
-    public function discos()
+    use HasFactory;
+
+    protected $table = 'tipo_entrada';
+    protected $primaryKey = 'tipo_entrada_id';
+
+    protected $fillable = [
+        'tipo_entrada_nombre',
+    ];
+
+    // Relaciones
+    public function perifericos()
     {
-        return $this->hasMany(disco_duro::class);
+        return $this->hasMany(Periferico::class, 'tipo_entrada_id');
     }
 
-    protected $table='tipo_entrada';
-    protected $fillable = ['tipo_entrada_nombre'];
-    use HasFactory;
+    public function discos()
+    {
+        return $this->hasMany(disco_duro::class, 'tipo_entrada_id');
+    }
 }

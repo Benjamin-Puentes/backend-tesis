@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('doc_id')->constrained('documentos');
+            $table->foreign('id_documento')->references('id')->on('documentos');
             $table->date('compra_fecha');
             $table->timestamps();
         });

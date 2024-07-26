@@ -35,17 +35,17 @@ class disco_duro extends Model
 
     public function entrada()
     {
-        return $this->belongsTo(tipo_entrada::class);
+        return $this->belongsTo(tipoentrada::class);
     }
 
     public function descuento()
     {
-        return $this->belongsTo(model_descuento::class);
+        return $this->belongsTo(descuento::class);
     }
 
-    public function compra()
+    public function venta()
     {
-        return $this->belongsTo(compra::class);
+        return $this->belongsTo(ventas::class);
     }
 
     protected $table='disco_duro';

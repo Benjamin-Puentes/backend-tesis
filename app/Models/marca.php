@@ -5,14 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class marca extends Model
+class Marca extends Model
 {
-    public function discos()
+    use HasFactory;
+
+    protected $table = 'marca';
+    protected $primaryKey = 'marca_id';
+
+    protected $fillable = [
+        'marca_nombre',
+    ];
+
+    // Relaciones
+    public function discosDuros()
     {
-        return $this->hasMany(disco_duro::class);
+        return $this->hasMany(DiscoDuro::class, 'marca_id');
     }
 
-    protected $table='marca';
-    protected $fillable = ['marca_nombre'];
-    use HasFactory;
+    public function rams()
+    {
+        return $this->hasMany(Ram::class, 'marca_id');
+    }
+
+    public function perifericos()
+    {
+        return $this->hasMany(Periferico::class, 'marca_id');
+    }
 }

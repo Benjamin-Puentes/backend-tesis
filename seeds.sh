@@ -1,40 +1,3 @@
-#!/bin/bash
-
-# Generar modelos
-php artisan make:model Usuario -m || true
-php artisan make:model Compra -m || true
-php artisan make:model Documento -m || true
-php artisan make:model Almacen -m || true
-php artisan make:model Herramienta -m || true
-php artisan make:model HerramientaSolicitud -m || true
-php artisan make:model Region -m || true
-php artisan make:model Venta -m || true
-php artisan make:model EstadoVenta -m || true
-php artisan make:model MetodoDespacho -m || true
-php artisan make:model MetodoPago -m || true
-php artisan make:model VentaDiscoDuro -m || true
-php artisan make:model Provincia -m || true
-php artisan make:model SolicitudResiduos -m || true
-php artisan make:model HerramientaEstado -m || true
-php artisan make:model LoteResiduos -m || true
-php artisan make:model DiscoDuro -m || true
-php artisan make:model Ram -m || true
-php artisan make:model Periferico -m || true
-php artisan make:model TipoEntrada -m || true
-php artisan make:model TipoPeriferico -m || true
-php artisan make:model Direccion -m || true
-php artisan make:model Ciudad -m || true
-php artisan make:model VentaRam -m || true
-php artisan make:model VentaPeriferico -m || true
-php artisan make:model TamanoDiscoDuro -m || true
-php artisan make:model Tamano -m || true
-php artisan make:model TamanoRam -m || true
-php artisan make:model TipoRam -m || true
-php artisan make:model VelocidadRam -m || true
-php artisan make:model Estado -m || true
-php artisan make:model Disponibilidad -m || true
-php artisan make:model Descuento -m || true
-php artisan make:model Marca -m || true
 
 # Generar seeders
 php artisan make:seeder UsuarioSeeder || true
@@ -107,4 +70,3 @@ php artisan make:factory EstadoFactory --model=Estado || true
 php artisan make:factory DisponibilidadFactory --model=Disponibilidad || true
 php artisan make:factory DescuentoFactory --model=Descuento || true
 php artisan make:factory MarcaFactory --model=Marca || true
-

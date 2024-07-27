@@ -25,9 +25,7 @@ Route::post('/documentos/upload', [Documento_Controller::class, 'upload']);
 Route::get('documentos/export/pdf', [Documento_Controller::class, 'exportPdf'])->name('documentos.exportPdf');
 Route::get('documentos/export/excel', [Documento_Controller::class, 'exportExcel'])->name('documentos.exportExcel');
 
-
-
-Route::resource('compras', CompraController::class);
+//Route::resource('compras', CompraController::class);
 
 Route::get('/reportes', [ReporteFinancieroController::class, 'index'])->name('reportes.index');
 Route::post('/reportes/generar', [ReporteFinancieroController::class, 'generar'])->name('reportes.generar');

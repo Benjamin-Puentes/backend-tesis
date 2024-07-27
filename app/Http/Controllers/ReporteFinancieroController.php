@@ -29,71 +29,113 @@ class ReporteFinancieroController extends Controller
         switch ($tipoReporte) {
             case 'estado_resultados':
                 $reporte = $this->generarEstadoResultados($fechaInicio, $fechaFin);
-                break;
+                return view('reportes.estado_resultados', compact('reporte'));
             case 'balance_general':
                 $reporte = $this->generarBalanceGeneral($fechaInicio, $fechaFin);
-                break;
+                return view('reportes.balance_general', compact('reporte'));
             case 'flujo_caja':
-                $reporte = $this->generarFlujoCaja($fechaInicio, $fechaFin);
-                break;
+                $tipoFlujoCaja = $request->input('tipo_flujo_caja', 'mensual');
+                $reporte = $this->generarFlujoCaja($fechaInicio, $fechaFin, $tipoFlujoCaja);
+                return view('reportes.flujo_caja', compact('reporte'));
         }
 
         // Si no hay suficientes datos para generar el reporte, mostrar un mensaje de error
-        if (!$reporte) {
-            return redirect()->route('reportes.index')->with('error', 'No hay suficientes datos para generar el reporte.');
-        }
-
-        // Mostrar el reporte generado al usuario
-        return view('reportes.resultado', compact('reporte'));
+        return redirect()->route('reportes.index')->with('error', 'No hay suficientes datos para generar el reporte.');
     }
 
     private function generarEstadoResultados($fechaInicio, $fechaFin)
     {
-        // Lógica para generar el estado de resultados basado en las fechas proporcionadas
-        // ...
+        $ingresos = ['boleta venta', 'recepcion', 'factura venta'];
+        $gastos = ['factura compra'];
+        // Obtener los ingresos en el período especificado
+        $ingresos_calc = Documentos::wherein('doc_tipo', $ingresos)
+                    ->whereBetween('doc_fecha', [$fechaInicio, $fechaFin])
+                    ->sum('doc_monto');
 
-        // Ejemplo de datos generados
+        // Obtener los gastos en el período especificado
+        $gastos_calc = Documentos::wherein('doc_tipo', $gastos)
+                    ->whereBetween('doc_fecha', [$fechaInicio, $fechaFin])
+                    ->sum('doc_monto');
+
+        // Calcular la utilidad neta
+        $utilidadNeta = $ingresos_calc - $gastos_calc;
+
+        // Devolver el estado de resultados
         return [
             'titulo' => 'Estado de Resultados',
             'fecha_inicio' => $fechaInicio,
             'fecha_fin' => $fechaFin,
-            'ingresos' => ,
-            'gastos' => ,
-            'utilidad_neta' => ,
+            'ingresos' => $ingresos_calc,
+            'gastos' => $gastos_calc,
+            'utilidad_neta' => $utilidadNeta,
         ];
     }
 
-    // Generar balance general
     private function generarBalanceGeneral($fechaInicio, $fechaFin)
     {
-        // Lógica para generar el balance general basado en las fechas proporcionadas
-        // ...
-
+        // Aquí implementas la lógica para generar el balance general basado en las fechas proporcionadas
         // Ejemplo de datos generados
         return [
             'titulo' => 'Balance General',
             'fecha_inicio' => $fechaInicio,
             'fecha_fin' => $fechaFin,
-            'activos' => ,
-            'pasivos' => ,
-            'patrimonio' => ,
+            'activos' => 10000, // Este es un ejemplo, deberías reemplazarlo con la lógica real
+            'pasivos' => 5000,  // Este es un ejemplo, deberías reemplazarlo con la lógica real
+            'patrimonio' => 5000, // Este es un ejemplo, deberías reemplazarlo con la lógica real
         ];
     }
 
-    // Generar flujo de caja
-    private function generarFlujoCaja($fechaInicio, $fechaFin)
+    private function generarFlujoCaja($fechaInicio, $fechaFin, $tipo = 'mensual')
     {
-        // Lógica para generar el flujo de caja basado en las fechas proporcionadas
-        // ...
+        $tiposFlujoEntrada = ['ingreso', 'venta'];
+        $tiposFlujoSalida = ['gasto', 'compra'];
 
-        // Ejemplo de datos generados
+        $tablaFlujoCaja = [];
+        $flujoEntradaTotal = 0;
+        $flujoSalidaTotal = 0;
+
+        $periodo = ($tipo === 'anual') ? 'year' : 'month';
+        $fechaActual = \Carbon\Carbon::parse($fechaInicio)->startOf($periodo);
+        $fechaFinCarbon = \Carbon\Carbon::parse($fechaFin)->endOf($periodo);
+
+        while ($fechaActual->lessThanOrEqualTo($fechaFinCarbon)) {
+            $inicioPeriodo = $fechaActual->copy()->startOf($periodo);
+            $finPeriodo = $fechaActual->copy()->endOf($periodo);
+
+            $flujoEntrada = Documentos::whereIn('doc_tipo', $tiposFlujoEntrada)
+                        ->whereBetween('doc_fecha', [$inicioPeriodo, $finPeriodo])
+                        ->sum('doc_monto');
+
+            $flujoSalida = Documentos::whereIn('doc_tipo', $tiposFlujoSalida)
+                        ->whereBetween('doc_fecha', [$inicioPeriodo, $finPeriodo])
+                        ->sum('doc_monto');
+
+            $flujoNeto = $flujoEntrada - $flujoSalida;
+
+            $tablaFlujoCaja[] = [
+                'periodo' => $inicioPeriodo->format($tipo === 'anual' ? 'Y' : 'Y-m'),
+                'flujo_entrada' => $flujoEntrada,
+                'flujo_salida' => $flujoSalida,
+                'flujo_neto' => $flujoNeto,
+            ];
+
+            $flujoEntradaTotal += $flujoEntrada;
+            $flujoSalidaTotal += $flujoSalida;
+
+            $fechaActual->addUnitNoOverflow($periodo, 1);
+        }
+
+        $flujoNetoTotal = $flujoEntradaTotal - $flujoSalidaTotal;
+
         return [
             'titulo' => 'Flujo de Caja',
             'fecha_inicio' => $fechaInicio,
             'fecha_fin' => $fechaFin,
-            'flujo_entrada' => ,
-            'flujo_salida' => ,
-            'flujo_neto' => ,
+            'tipo' => $tipo,
+            'tabla' => $tablaFlujoCaja,
+            'flujo_entrada_total' => $flujoEntradaTotal,
+            'flujo_salida_total' => $flujoSalidaTotal,
+            'flujo_neto_total' => $flujoNetoTotal,
         ];
     }
 }

@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url('path_to_your_background_image.jpg');
+            background-image: url('public/images/logo.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -36,12 +36,11 @@
                     <h4>Menú</h4>
                     <a href="{{ route('documentos.index') }}">Gestión de Documentos</a>
                     <a href="{{ route('reportes.index') }}">Generar Reportes Financieros</a>
-                    
+
                     <!-- Agregar más opciones de menú aquí según sea necesario -->
                 </div>
             </div>
             <div class="col-md-9">
-                <!-- Contenido principal puede ir aquí -->
             </div>
         </div>
     </div>

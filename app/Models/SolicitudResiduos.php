@@ -18,7 +18,7 @@ class SolicitudResiduos extends Model
         'peso_aproximado',
         'volumen_real',
         'peso_real',
-        'doc_id',
+        'id_documentos',
     ];
 
     // Relaciones
@@ -34,6 +34,6 @@ class SolicitudResiduos extends Model
 
     public function documento()
     {
-        return $this->belongsTo(Documentos::class, 'doc_id');
+        return $this->belongsTo(Documentos::class, 'id_documentos');
     }
 }

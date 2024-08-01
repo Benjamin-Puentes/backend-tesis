@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('estado_ventas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('estado_venta_nombre');
+            $table->string('estado_venta_slug');
         });
     }
 

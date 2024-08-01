@@ -14,6 +14,14 @@ return new class extends Migration
         Schema::create('venta_disco_duros', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->unsignedBigInteger('disco_duro_id');
+            $table->unsignedBigInteger('venta_id');
+            $table->unsignedBigInteger('descuento_id')->nullable();
+
+            $table->foreign('disco_duro_id')->references('id')->on('disco_duro');
+            $table->foreign('venta_id')->references('id')->on('ventas');
+            $table->foreign('descuento_id')->references('id')->on('descuento');
         });
     }
 

@@ -48,7 +48,7 @@ class ventas extends Model
     }
     public function documento()
     {
-        return $this->belongsTo(Documentos::class, 'doc_id');
+        return $this->belongsTo(Documentos::class, 'id_documentos');
     }
 
     protected $table='ventas';

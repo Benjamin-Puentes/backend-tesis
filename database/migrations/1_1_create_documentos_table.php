@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('documentos', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('doc_tipo');
-            $table->string('descripcion');
+            $table->string('doc_descripcion');
             $table->date('doc_fecha');
             $table->decimal('doc_monto', 15, 2);
-            $table->string('archivo');
-            $table->timestamps();
+            $table->string('doc_archivo');
         });
     }
 

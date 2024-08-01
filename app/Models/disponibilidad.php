@@ -14,6 +14,7 @@ class Disponibilidad extends Model
 
     protected $fillable = [
         'disponibilidad_nombre',
+        'disponibilidad_descripcion'
     ];
 
     // Relaciones

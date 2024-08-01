@@ -15,13 +15,13 @@ class Compras extends Model
     protected $fillable = [
         'detalles',
         'compra_fecha',
-        'doc_id',
+        'id_documentos',
     ];
 
     // Relaciones
     public function documento()
     {
-        return $this->belongsTo(Documentos::class, 'doc_id');
+        return $this->belongsTo(Documentos::class, 'id_documentos');
     }
 
 }

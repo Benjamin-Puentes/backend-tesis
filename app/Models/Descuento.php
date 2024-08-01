@@ -19,7 +19,7 @@ class Descuento extends Model
     // Relaciones
     public function discosDuros()
     {
-        return $this->hasMany(DiscoDuro::class, 'descuento_id');
+        return $this->hasMany(Disco_Duro::class, 'descuento_id');
     }
 
     public function rams()

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VelocidadRam extends Model
+class Velocidad_Ram extends Model
 {
     use HasFactory;
 

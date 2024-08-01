@@ -64,7 +64,7 @@ class Ram extends Model
 
     public function velocidadRam()
     {
-        return $this->belongsTo(VelocidadRam::class, 'velocidad_ram_id');
+        return $this->belongsTo(Velocidad_Ram::class, 'velocidad_ram_id');
     }
 
     public function solicitudResiduos()

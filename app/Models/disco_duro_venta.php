@@ -18,8 +18,9 @@ class disco_duro_venta extends Model
         return $this->belongsTo(disco_duro::class);
     }
 
-    protected $table='disco_duro_compra';
+    protected $table='disco_duro_venta';
     protected $fillable = ['disco_duro_id',
-        'compra_id'];
+                            'venta_id',
+                            'descuento_id'];
     use HasFactory;
 }

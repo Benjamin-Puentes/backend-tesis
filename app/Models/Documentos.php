@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Documentos extends Model
 {
-    use HasFactory;
+    protected $table = 'documentos';
+    protected $primaryKey = 'documentos_id';
 
     protected $fillable = [
         'doc_tipo',
@@ -31,5 +32,6 @@ class Documentos extends Model
     {
         return $this->hasMany(SolicitudResiduos::class, 'doc_id');
     }
-
+    
+    use HasFactory;
 }

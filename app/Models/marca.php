@@ -19,7 +19,7 @@ class Marca extends Model
     // Relaciones
     public function discosDuros()
     {
-        return $this->hasMany(DiscoDuro::class, 'marca_id');
+        return $this->hasMany(Disco_Duro::class, 'marca_id');
     }
 
     public function rams()

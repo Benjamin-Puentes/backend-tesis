@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('herramienta_solicituds', function (Blueprint $table) {
+        Schema::create('herramienta_solicitud', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            
         });
     }
 

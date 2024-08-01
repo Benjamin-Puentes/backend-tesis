@@ -20,12 +20,15 @@ return new class extends Migration
             $table->unsignedBigInteger('metodo_pago_id');
             $table->unsignedBigInteger('metodo_despacho_id');
             $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_documentos');
 
             $table->foreign('estado_venta_id')->references('id')->on('estado_venta');
             $table->foreign('direccion_id')->references('id')->on('direccion');
             $table->foreign('metodo_pago_id')->references('id')->on('metodo_pago');
             $table->foreign('metodo_despacho_id')->references('id')->on('metodo_despacho');
             $table->foreign('id_usuario')->references('id')->on('usuarios');
+            $table->foreign('id_documentos')->references('id')->on('documentos');
+
         });
     }
 

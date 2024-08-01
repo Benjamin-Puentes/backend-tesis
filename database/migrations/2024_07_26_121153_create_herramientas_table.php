@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('herramientas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('herramienta_nombre');
+            $table->unsignedBigInteger('herramienta_estado_id');
+
+            $table->foreign('herramienta_estado_id')->references('id')->on('herramienta_estado');
         });
     }
 

@@ -10,9 +10,11 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_documento')->references('id')->on('documentos');
-            $table->date('compra_fecha');
             $table->timestamps();
+            $table->date('compra_fecha');
+            $table->unsignedBigInteger('id_documentos');
+
+            $table->foreign('id_documentos')->references('id')->on('documentos');
         });
     }
     

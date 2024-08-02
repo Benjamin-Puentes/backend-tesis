@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('descuentos', function (Blueprint $table) {
+        Schema::create('descuento', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->integer('descuento_porcentaje');
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('descuentos');
+        Schema::dropIfExists('descuento');
     }
 };

@@ -4,8 +4,8 @@
 <div class="container">
     <h1>Documentos</h1>
     <a href="{{ route('documentos.crear') }}" class="btn btn-primary">Subir Documento</a>
-    <a href="{{ route('documentos.exportPdf') }}" class="btn btn-secondary">Exportar PDF</a>
-    <a href="{{ route('documentos.exportExcel') }}" class="btn btn-secondary">Exportar Excel</a>
+ <!--   <a href="{{ route('documentos.exportPdf') }}" class="btn btn-secondary">Exportar PDF</a>
+    <a href="{{ route('documentos.exportExcel') }}" class="btn btn-secondary">Exportar Excel</a> -->
     <table class="table mt-4">
         <thead>
             <tr>

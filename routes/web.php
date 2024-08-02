@@ -18,12 +18,12 @@ use App\Http\Controllers\ReporteFinancieroController;
     
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::resource('documentos', Documento_Controller::class);
-Route::post('/documentos', [Documento_Controller::class, 'store']);
-Route::get('/documentos/create', [Documento_Controller::class, 'create']);
-Route::post('/documentos/upload', [Documento_Controller::class, 'upload']);
-Route::get('documentos/export/pdf', [Documento_Controller::class, 'exportPdf'])->name('documentos.exportPdf');
-Route::get('documentos/export/excel', [Documento_Controller::class, 'exportExcel'])->name('documentos.exportExcel');
+Route::resource('Documentos', Documento_Controller::class);
+Route::post('/Documentos', [Documento_Controller::class, 'store']);
+Route::get('/Documentos/crear', [Documento_Controller::class, 'create']);
+Route::post('/Documentos/upload', [Documento_Controller::class, 'upload']);
+//Route::get('Documentos/export/pdf', [Documento_Controller::class, 'exportPdf'])->name('documentos.exportPdf');
+//Route::get('Documentos/export/excel', [Documento_Controller::class, 'exportExcel'])->name('documentos.exportExcel');
 
 //Route::resource('compras', CompraController::class);
 

@@ -9,8 +9,8 @@ class Usuario extends Model
 {
     use HasFactory;
 
-    protected $table = 'usuario';
-    protected $primaryKey = 'usuario_id';
+    protected $table = 'user';
+    protected $primaryKey = 'user_id';
 
     protected $fillable = [
         'usuario_correo',
@@ -27,11 +27,11 @@ class Usuario extends Model
 
     public function herramientasSolicitudes()
     {
-        return $this->hasMany(HerramientaSolicitud::class, 'usuario_id');
+        return $this->hasMany(HerramientaSolicitud::class, 'user_id');
     }
 
     public function residuosSolicitudes()
     {
-        return $this->hasMany(SolicitudResiduos::class, 'usuario_id');
+        return $this->hasMany(SolicitudResiduos::class, 'user_id');
     }
 }

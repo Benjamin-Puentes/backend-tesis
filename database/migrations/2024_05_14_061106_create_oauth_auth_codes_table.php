@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('oauth_auth_codes', function (Blueprint $table) {
             $table->string('id', 100)->primary();
-            $table->unsignedBigInteger('id_usuario')->index();
+            $table->unsignedBigInteger('id_user')->index();
             $table->unsignedBigInteger('client_id');
             $table->text('scopes')->nullable();
             $table->boolean('revoked');

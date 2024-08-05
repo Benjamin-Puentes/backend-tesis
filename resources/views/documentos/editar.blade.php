@@ -24,8 +24,8 @@
             <input type="number" class="form-control" id="monto" name="monto" value="{{ $documento->monto }}" required>
         </div>
         <div class="form-group">
-            <label for="archivo_pdf">Archivo PDF</label>
-            <input type="file" class="form-control" id="archivo_pdf" name="archivo_pdf">
+            <label for="archivo_pdf">Archivo</label>
+            <input type="file" class="form-control" id="archivo" name="archivo">
             <small class="form-text text-muted">Deja este campo vacío si no deseas cambiar el archivo.</small>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>

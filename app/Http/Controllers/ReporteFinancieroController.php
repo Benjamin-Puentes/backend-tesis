@@ -73,16 +73,17 @@ class ReporteFinancieroController extends Controller
 
     private function generarBalanceGeneral($fechaInicio, $fechaFin)
     {
-        // Aquí implementas la lógica para generar el balance general basado en las fechas proporcionadas
-        // Ejemplo de datos generados
+        //placeholder
+        //{
         return [
             'titulo' => 'Balance General',
             'fecha_inicio' => $fechaInicio,
             'fecha_fin' => $fechaFin,
-            'activos' => 10000, // Este es un ejemplo, deberías reemplazarlo con la lógica real
-            'pasivos' => 5000,  // Este es un ejemplo, deberías reemplazarlo con la lógica real
-            'patrimonio' => 5000, // Este es un ejemplo, deberías reemplazarlo con la lógica real
+            'activos' => 10000, 
+            'pasivos' => 5000,  
+            'patrimonio' => 5000, 
         ];
+        //}
     }
 
     private function generarFlujoCaja($fechaInicio, $fechaFin, $tipo = 'mensual')
@@ -122,7 +123,7 @@ class ReporteFinancieroController extends Controller
             $flujoEntradaTotal += $flujoEntrada;
             $flujoSalidaTotal += $flujoSalida;
 
-            $fechaActual->addUnitNoOverflow($periodo, 1);
+            $fechaActual->addUnit($periodo, 1);
         }
 
         $flujoNetoTotal = $flujoEntradaTotal - $flujoSalidaTotal;

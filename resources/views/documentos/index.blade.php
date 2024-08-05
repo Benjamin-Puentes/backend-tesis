@@ -4,8 +4,6 @@
 <div class="container">
     <h1>Documentos</h1>
     <a href="{{ route('documentos.crear') }}" class="btn btn-primary">Subir Documento</a>
- <!--   <a href="{{ route('documentos.exportPdf') }}" class="btn btn-secondary">Exportar PDF</a>
-    <a href="{{ route('documentos.exportExcel') }}" class="btn btn-secondary">Exportar Excel</a> -->
     <table class="table mt-4">
         <thead>
             <tr>
@@ -26,7 +24,7 @@
                 <td>{{ $documento->numero }}</td>
                 <td>{{ $documento->fecha }}</td>
                 <td>{{ $documento->monto }}</td>
-                <td><a href="{{ Storage::url($documento->archivo_pdf) }}" target="_blank">Ver PDF</a></td>
+                <td><a href="{{ Storage::url($documento->archivo) }}" target="_blank">Ver PDF</a></td>
                 <td>
                     <a href="{{ route('documentos.editar', $documento) }}" class="btn btn-warning">Editar</a>
                     <form action="{{ route('documentos.destroy', $documento) }}" method="POST" style="display:inline;">

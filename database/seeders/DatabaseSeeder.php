@@ -15,6 +15,7 @@ use App\Models\Direccion;
 use App\Models\Ciudad;
 use App\Models\Disponibilidad;
 use App\Models\Descuento;
+use App\Models\Documentos;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
         Ciudad::factory(5)->create();
         Disponibilidad::factory(5)->create();
         Descuento::factory(5)->create();
+        Documentos::factory(5)->create();
         
     }
 }

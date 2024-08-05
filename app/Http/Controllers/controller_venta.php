@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\ventas;
 use App\Models\venta_cable;
-use App\Models\disco_duro;
 use App\Models\disco_duro_venta;
-use App\Models\periferico;
 use App\Models\periferico_venta;
 use App\Models\ram_venta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use stdClass;
 
 class controller_venta extends Controller
 {

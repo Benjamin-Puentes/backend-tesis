@@ -20,7 +20,7 @@ class Documentos extends Model
 
     public function compras()
     {
-        return $this->hasMany(Compras::class, 'doc_id');
+        return $this->hasMany(Compra::class, 'doc_id');
     }
 
     public function ventas()

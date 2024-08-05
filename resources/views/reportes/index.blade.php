@@ -1,56 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Generar Reporte Financiero</title>
-    <script>
-        function updateAction() {
-            const tipoReporte = document.getElementById('tipo_reporte').value;
-            let actionUrl = '';
+@extends('layouts.app')
 
-            switch (tipoReporte) {
-                case 'estado_resultados':
-                    actionUrl = '{{ route("reportes.estado_resultados") }}';
-                    break;
-                case 'balance_general':
-                    actionUrl = '{{ route("reportes.balance_general") }}';
-                    break;
-                case 'flujo_caja':
-                    actionUrl = '{{ route("reportes.flujo_caja") }}';
-                    break;
-            }
-
-            document.getElementById('reporteForm').action = actionUrl;
-        }
-    </script>
-</head>
-<body>
+@section('content')
+<div class="container">
     <h1>Generar Reporte Financiero</h1>
-
-    @if (session('error'))
-        <div style="color: red;">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <form id="reporteForm" method="POST" onsubmit="updateAction()">
+    <form id="reporteForm" action="{{ route('reportes.generar') }}" method="POST">
         @csrf
-        <label for="tipo_reporte">Tipo de Reporte:</label>
-        <select id="tipo_reporte" name="tipo_reporte" onchange="updateAction()">
-            <option value="estado_resultados">Estado de Resultados</option>
-            <option value="balance_general">Balance General</option>
-            <option value="flujo_caja">Flujo de Caja</option>
-        </select>
-        <br>
-
-        <label for="fecha_inicio">Fecha de Inicio:</label>
-        <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ old('fecha_inicio') }}">
-        <br>
-
-        <label for="fecha_fin">Fecha de Fin:</label>
-        <input type="date" id="fecha_fin" name="fecha_fin" value="{{ old('fecha_fin') }}">
-        <br>
-
-        <button type="submit">Generar Reporte</button>
+        <div class="form-group">
+            <label for="tipo_reporte">Tipo de Reporte</label>
+            <select name="tipo_reporte" id="tipo_reporte" class="form-control" required>
+                <option value="estado_resultados">Estado de Resultados</option>
+                <option value="balance_general">Balance General</option>
+                <option value="flujo_caja">Flujo de Caja</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fecha_inicio">Fecha de Inicio</label>
+            <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="fecha_fin">Fecha de Fin</label>
+            <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" required>
+        </div>
+        <div class="form-group" id="tipo_flujo_caja_group" style="display:none;">
+            <label for="tipo_flujo_caja">Tipo de Flujo de Caja</label>
+            <select name="tipo_flujo_caja" id="tipo_flujo_caja" class="form-control">
+                <option value="mensual">Mensual</option>
+                <option value="anual">Anual</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Generar Reporte</button>
     </form>
-</body>
-</html>
+</div>
+
+<script>
+    document.getElementById('tipo_reporte').addEventListener('change', function() {
+        const tipoReporte = this.value;
+        const flujoCajaGroup = document.getElementById('tipo_flujo_caja_group');
+        if (tipoReporte === 'flujo_caja') {
+            flujoCajaGroup.style.display = 'block';
+        } else {
+            flujoCajaGroup.style.display = 'none';
+        }
+    });
+</script>
+@endsection

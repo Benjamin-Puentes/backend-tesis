@@ -6,7 +6,7 @@ WORKDIR /var/www/html
 
 # Instala las extensiones de PHP necesarias
 RUN apt-get update
-RUN apt-get install libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libzip-dev 7z -y
+RUN apt-get install libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libzip-dev p7zip-full -y
 
 # Instalar extensiones PHP
 RUN docker-php-ext-install pdo pdo_mysql dom

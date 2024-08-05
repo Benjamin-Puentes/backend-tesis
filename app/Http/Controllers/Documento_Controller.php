@@ -17,9 +17,9 @@ class Documento_Controller extends Controller
         return view('documentos.index', compact('documentos'));
     }
 
-    public function crear()
+    public function create()
     {
-        return view('documentos.crear');
+        return view('documentos.create');
     }
 
     public function upload(Request $request)
@@ -58,9 +58,9 @@ class Documento_Controller extends Controller
     }
 
     public function show(Documentos $documento)
-    {
-        return view('documentos.show', compact('documento'));
-    }
+   {
+       return view('Documentos.show', compact('documento'));
+   }
 
 
     public function update(Request $request, Documentos $documento)
@@ -92,11 +92,11 @@ class Documento_Controller extends Controller
         return redirect()->route('documentos.index')->with('success', 'Documento eliminado con éxito.');
     }
 
-    public function exportPdf()
-    {
-        $documentos = Documentos::all();
-        $pdf = PDF::loadView('documento.pdf', compact('documento'));
-        return $pdf->download('documento.pdf');
-    }
+    // public function exportPdf()
+    // {
+    //     $documentos = Documentos::all();
+    //     $pdf = pdf::loadView('documento.pdf', compact('documento'));
+    //     return $pdf->download('documento.pdf');
+    // }
 
 }

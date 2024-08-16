@@ -12,6 +12,6 @@ class HerramientaEstadoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\HerramientaEstado::factory()->count(10)->create();
     }
 }

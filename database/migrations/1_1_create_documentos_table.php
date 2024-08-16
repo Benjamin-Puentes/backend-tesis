@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('doc_descripcion');
             $table->date('doc_fecha');
             $table->decimal('doc_monto', 15, 2);
-            $table->string('doc_archivo');
+            $table->string('doc_archivo')->nullable();
         });
     }
 

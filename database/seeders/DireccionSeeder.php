@@ -12,6 +12,6 @@ class DireccionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\direccion::factory()->count(10)->create();
     }
 }

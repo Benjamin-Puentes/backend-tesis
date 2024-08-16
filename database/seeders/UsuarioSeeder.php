@@ -12,6 +12,6 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Usuario::factory()->count(10)->create();
     }
 }

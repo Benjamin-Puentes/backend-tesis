@@ -12,6 +12,6 @@ class TipoRamSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\TipoRam::factory()->count(10)->create();
     }
 }

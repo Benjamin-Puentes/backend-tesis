@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('direccion', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('direccion_nombre');
+            $table->string('calle_nombre');
             $table->unsignedBigInteger('ciudad_id');
             $table->unsignedBigInteger('id_usuario')->nullable();
             $table->foreign('ciudad_id')->references('id')->on('ciudad');

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\EstadoVenta;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +10,18 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class EstadoVentaFactory extends Factory
 {
+    protected $model = EstadoVenta::class;
+
     /**
-     * Define the model's default state.
+     * Define el estado predeterminado del modelo.
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
         return [
-            //
+            'estado_venta_nombre' => $this->faker->word, // Genera un nombre ficticio para el estado de venta
+            'estado_venta_slug' => $this->faker->word
         ];
     }
 }

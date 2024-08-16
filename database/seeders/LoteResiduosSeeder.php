@@ -12,6 +12,6 @@ class LoteResiduosSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\LoteResiduos::factory()->count(10)->create();
     }
 }

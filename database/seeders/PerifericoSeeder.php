@@ -12,6 +12,6 @@ class PerifericoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Periferico::factory()->count(10)->create();
     }
 }

@@ -12,6 +12,6 @@ class DescuentoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\descuento::factory()->count(10)->create();
     }
 }

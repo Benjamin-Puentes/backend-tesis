@@ -14,6 +14,7 @@ class EstadoVenta extends Model
 
     protected $fillable = [
         'estado_venta_nombre',
+        'estado_venta_slug'
     ];
 
     // Relaciones

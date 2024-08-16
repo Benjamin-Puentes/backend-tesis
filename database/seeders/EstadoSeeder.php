@@ -12,6 +12,6 @@ class EstadoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Estado::factory()->count(10)->create();
     }
 }

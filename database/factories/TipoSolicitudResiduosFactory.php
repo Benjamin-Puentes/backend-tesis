@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\TipoSolicitudResiduos;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Venta>
- */
-class VentaFactory extends Factory
+class TipoSolicitudResiduosFactory extends Factory
 {
+    protected $model = TipoSolicitudResiduos::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +17,7 @@ class VentaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'tipo_solicitud_residuos_nombre' => $this->faker->word, // Genera un nombre ficticio
         ];
     }
 }

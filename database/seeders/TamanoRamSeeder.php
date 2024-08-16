@@ -12,6 +12,6 @@ class TamanoRamSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\tamano_ram::factory()->count(10)->create();
     }
 }

@@ -12,6 +12,6 @@ class VelocidadRamSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Velocidad_Ram::factory()->count(10)->create();
     }
 }

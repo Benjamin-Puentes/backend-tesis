@@ -12,6 +12,6 @@ class MetodoPagoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\MetodoPago::factory()->count(10)->create();
     }
 }

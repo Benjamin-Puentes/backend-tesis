@@ -12,6 +12,6 @@ class RamSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Ram::factory()->count(10)->create();
     }
 }

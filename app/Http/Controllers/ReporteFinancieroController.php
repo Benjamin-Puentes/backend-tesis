@@ -123,7 +123,11 @@ class ReporteFinancieroController extends Controller
             $flujoEntradaTotal += $flujoEntrada;
             $flujoSalidaTotal += $flujoSalida;
 
-            $fechaActual->addUnit($periodo, 1);
+            if ($tipo === 'anual') {
+                $fechaActual->addYear();
+            } else {
+                $fechaActual->addMonth();
+            }
         }
 
         $flujoNetoTotal = $flujoEntradaTotal - $flujoSalidaTotal;

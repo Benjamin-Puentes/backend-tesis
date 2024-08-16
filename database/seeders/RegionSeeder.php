@@ -12,6 +12,6 @@ class RegionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Region::factory()->count(10)->create();
     }
 }

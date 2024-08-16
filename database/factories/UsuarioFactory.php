@@ -1,9 +1,11 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Usuario;
 use App\Models\Direccion;
+use App\Models\Ciudad;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class UsuarioFactory extends Factory
 {
@@ -12,11 +14,21 @@ class UsuarioFactory extends Factory
     public function definition()
     {
         return [
-            'correo' => $this->faker->unique()->safeEmail,
-            'nombre' => $this->faker->name,
-            'direccion_id' => Direccion::factory(),
-            'privilegios' => json_encode($this->faker->words(3)),
+            'usuario_correo' => $this->faker->unique()->safeEmail,
+            'usuario_nombre' => $this->faker->name,
+            'usuario_privilegios' => false,
+            'password' => bcrypt('password'),
         ];
     }
-}
 
+    public function configure()
+    {
+        return $this->afterCreating(function (Usuario $usuario) {
+            // Crear una dirección asociada al usuario recién creado
+            Direccion::factory()->create([
+                'id_usuario' => $usuario->id,
+                'ciudad_id' => Ciudad::inRandomOrder()->first()->id,
+            ]);
+        });
+    }
+}

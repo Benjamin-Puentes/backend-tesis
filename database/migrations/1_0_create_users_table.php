@@ -10,17 +10,17 @@ return new class extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('admin_privilegies')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('usuario_nombre');
+            $table->boolean('usuario_privilegios')->nullable();
+            $table->string('usuario_correo')->unique();
+            $table->timestamp('usuario_correo_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->string('usuario_correo')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });

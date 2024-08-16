@@ -12,6 +12,6 @@ class ProvinciaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Provincia::factory()->count(10)->create();
     }
 }

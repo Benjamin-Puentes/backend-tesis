@@ -12,6 +12,6 @@ class MetodoDespachoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\MetodoDespacho::factory()->count(10)->create();
     }
 }

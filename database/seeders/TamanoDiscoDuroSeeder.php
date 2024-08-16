@@ -12,6 +12,6 @@ class TamanoDiscoDuroSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\TamanoDiscoDuro::factory()->count(10)->create();
     }
 }

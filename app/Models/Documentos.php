@@ -15,22 +15,22 @@ class Documentos extends Model
         'descripcion', 
         'doc_fecha', 
         'doc_monto', 
-        'archivo', //archivo es la ruta en el sv
+        'doc_archivo', //archivo es la ruta en el sv
     ];
 
     public function compras()
     {
-        return $this->hasMany(Compra::class, 'doc_id');
+        return $this->hasMany(Compra::class, 'documentos_id');
     }
 
     public function ventas()
     {
-        return $this->hasMany(Ventas::class, 'doc_id');
+        return $this->hasMany(Ventas::class, 'documentos_id');
     }
 
     public function residuos()
     {
-        return $this->hasMany(SolicitudResiduos::class, 'doc_id');
+        return $this->hasMany(SolicitudResiduos::class, 'documentos_id');
     }
     
     use HasFactory;

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +10,17 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class RegionFactory extends Factory
 {
+    protected $model = Region::class;
+
     /**
-     * Define the model's default state.
+     * Define el estado predeterminado del modelo.
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
         return [
-            //
+            'region_nombre' => $this->faker->word, // Genera un nombre ficticio para la región
         ];
     }
 }

@@ -12,6 +12,6 @@ class TipoPerifericoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\TipoPeriferico::factory()->count(10)->create();
     }
 }

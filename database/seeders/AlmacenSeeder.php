@@ -12,6 +12,7 @@ class AlmacenSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\almacen::factory()->count(10)->create();
+
     }
 }

@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('detalles');
             $table->date('compra_fecha');
             $table->unsignedBigInteger('id_documentos');
 

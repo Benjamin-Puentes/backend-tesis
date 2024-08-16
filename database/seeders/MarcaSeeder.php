@@ -12,6 +12,6 @@ class MarcaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Marca::factory()->count(10)->create();
     }
 }

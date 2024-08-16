@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Ciudad;
+use App\Models\Provincia; // Asegúrate de importar el modelo Provincia
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CiudadFactory extends Factory
 {
+    protected $model = Ciudad::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +21,8 @@ class CiudadFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'ciudad_nombre' => $this->faker->city, // Genera un nombre de ciudad ficticio
+            'provincia_id' => Provincia::inRandomOrder()->first()->id,
         ];
     }
 }

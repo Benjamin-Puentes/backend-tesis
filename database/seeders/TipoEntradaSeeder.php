@@ -12,6 +12,6 @@ class TipoEntradaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\TipoEntrada::factory()->count(10)->create();
     }
 }

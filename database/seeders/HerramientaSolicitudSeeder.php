@@ -12,6 +12,6 @@ class HerramientaSolicitudSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\HerramientaSolicitud::factory()->count(10)->create();
     }
 }

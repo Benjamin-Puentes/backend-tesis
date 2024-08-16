@@ -12,6 +12,6 @@ class VentaPerifericoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Periferico_venta::factory()->count(10)->create();
     }
 }

@@ -17,6 +17,7 @@ class Usuario extends Model
         'usuario_nombre',
         'usuario_privilegios',
         'direccion_id',
+        'password'
     ];
 
     // Relaciones

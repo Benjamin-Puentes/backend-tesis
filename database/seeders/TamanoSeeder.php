@@ -12,6 +12,6 @@ class TamanoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Tamano\App\Models\::factory()->count(10)->create();::factory()->count(10)->create();
     }
 }

@@ -6,22 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('lote_residuos', function (Blueprint $table) {
+        Schema::create('tipo_solicitud_residuos', function (Blueprint $table) {
             $table->id();
+            $table->string('tipo_solicitud_residuos_nombre');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('lote_residuos');
+        Schema::dropIfExists('tipo_solicitud_residuos');
     }
 };

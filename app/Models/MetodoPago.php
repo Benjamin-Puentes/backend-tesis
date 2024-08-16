@@ -14,9 +14,9 @@ class MetodoPago extends Model
 
     protected $fillable = [
         'metodo_pago_nombre',
+        'metodo_pago_slug',
     ];
 
-    // Relaciones
     public function ventas()
     {
         return $this->hasMany(Ventas::class, 'metodo_pago_id');

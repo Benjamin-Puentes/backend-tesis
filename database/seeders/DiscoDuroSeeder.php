@@ -12,6 +12,6 @@ class DiscoDuroSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\disco_duro::factory()->count(10)->create();
     }
 }

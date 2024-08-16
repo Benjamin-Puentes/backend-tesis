@@ -12,6 +12,6 @@ class VentaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\ventas::factory()->count(10)->create();
     }
 }

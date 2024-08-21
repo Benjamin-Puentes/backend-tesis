@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ram_venta extends Model
+class CapacidadRam extends Model
 {
-    protected $table='ram_venta';
-    protected $fillable = ['ram_id',
-        'venta_id'];
+    protected $table='capacidad_ram';
+    protected $fillable = [
+        'capacidad_ram_capacidad'];
     use HasFactory;
 }

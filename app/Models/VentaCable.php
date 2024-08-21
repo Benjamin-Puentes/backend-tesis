@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class venta_cable extends Model
+class VentaCable extends Model
 {
     protected $table='venta_cable';
     protected $fillable = [

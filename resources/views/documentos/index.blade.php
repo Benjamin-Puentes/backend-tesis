@@ -50,7 +50,13 @@
                 <td>{{ $documento->doc_tipo }}</td>
                 <td>{{ $documento->doc_fecha }}</td>
                 <td>{{ $documento->doc_monto }}</td>
-                <td><a href="{{ Storage::url($documento->archivo) }}" target="_blank">Ver Original</a></td>
+                <td>
+                    @if($documento->doc_archivo)
+                        <a href="{{ route('documentos.archivo', ['filename' => basename($documento->doc_archivo)]) }}" target="_blank">Ver Original</a>
+                    @else
+                        <span>No hay archivo disponible</span>
+                    @endif
+                </td>
                 <td>
                 <a href="{{ route('documentos.edit', ['documento' => $documento->id]) }}" class="btn btn-warning">Editar</a>                    
                 <form action="{{ route('documentos.destroy', ['documento' => $documento->id]) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este documento?');">

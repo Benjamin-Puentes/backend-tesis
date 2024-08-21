@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('doc_tipo');
-            $table->string('doc_descripcion');
+            $table->string('doc_descripcion')->nullable();
             $table->date('doc_fecha');
             $table->decimal('doc_monto', 15, 2);
             $table->string('doc_archivo')->nullable();

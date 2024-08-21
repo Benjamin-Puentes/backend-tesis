@@ -19,6 +19,6 @@ class Tamano extends Model
     // Relaciones
     public function discosDuros()
     {
-        return $this->hasMany(Disco_Duro::class, 'tamano_id');
+        return $this->hasMany(DiscoDuro::class, 'tamano_id');
     }
 }

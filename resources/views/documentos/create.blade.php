@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('documentos.store') }}" method="POST">
+    <form action="{{ route('documentos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="doc_tipo">Tipo de Documento</label>
@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             <label for="doc_descripcion">Detalles</label>
-            <input type="text" name="descripcion" class="form-control">
+            <input type="text" name="doc_descripcion" class="form-control">
         </div>
         <div class="form-group">
             <label for="doc_fecha">Fecha</label>
@@ -31,6 +31,10 @@
         <div class="form-group">
             <label for="doc_monto">Monto</label>
             <input type="number" step="0.01" name="doc_monto" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="doc_archivo">Archivo</label>
+            <input type="file" name="doc_archivo" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Registrar</button>
         <a href="{{ route('documentos.index') }}" class="btn btn-secondary">Volver</a>

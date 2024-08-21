@@ -44,7 +44,7 @@ class Documento_Controller extends Controller
             'archivo' => 'required|file|mimes:pdf,doc,docx,csv,xlsx',
         ]);
 
-        $path = $request->file('archivo')->store('documentos');
+        $path = $request->file('doc_archivo')->store('documentos');
 
         return response()->json(['path' => $path]);
     }
@@ -52,21 +52,25 @@ class Documento_Controller extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'doc_tipo' => 'required|string',
-            'doc_descripcion' => 'nullable|string',
+            'doc_tipo' => 'required|string|max:255',
+            'doc_descripcion' => 'nullable|string|max:255',
             'doc_fecha' => 'required|date',
             'doc_monto' => 'required|numeric',
-            'archivo' => 'required|file|mimes:pdf,doc,docx,csv,xlsx',
+            'doc_archivo' => 'nullable|file|mimes:pdf,doc,docx,csv,xlsx',
         ]);
 
-        $archivo = $request->file('archivo')->store('documentos');
+        if ($request->hasFile('doc_archivo')) {
+            $archivo = $request->file('doc_archivo')->store('documentos');
+        } else {
+            $archivo = null;
+        }
 
         Documentos::create([
             'doc_tipo' => $request->doc_tipo,
             'doc_descripcion' => $request->doc_descripcion,
             'doc_fecha' => $request->doc_fecha,
             'doc_monto' => $request->doc_monto,
-            'archivo' => $archivo,
+            'doc_archivo' => $archivo,
         ]);
 
         return redirect()->route('documentos.index')->with('success', 'Documento subido con éxito.');
@@ -80,16 +84,16 @@ class Documento_Controller extends Controller
     public function update(Request $request, Documentos $documento)
     {
         $request->validate([
-            'tipo' => 'required|string',
-            'descripcion' => 'nullable|string',
-            'fecha' => 'required|date',
-            'monto' => 'required|numeric',
-            'archivo' => 'nullable|file|mimes:pdf,doc,docx,csv,xlsx',
+            'doc_tipo' => 'required|string|max:255',
+            'doc_descripcion' => 'nullable|string|max:255',
+            'doc_fecha' => 'required|date',
+            'doc_monto' => 'required|numeric',
+            'doc_archivo' => 'nullable|file|mimes:pdf,doc,docx,csv,xlsx',
         ]);
 
         if ($request->hasFile('archivo')) {
             Storage::delete($documento->archivo);
-            $archivo = $request->file('archivo')->store('documentos');
+            $archivo = $request->file('doc_archivo')->store('documentos');
             $documento->archivo = $archivo;
         }
 
@@ -100,7 +104,9 @@ class Documento_Controller extends Controller
 
     public function destroy(Documentos $documento)
     {
-        Storage::delete($documento->doc_archivo);
+        if ($documento->doc_archivo) {
+            Storage::delete($documento->doc_archivo);
+        }
         $documento->delete();
         
         return redirect()->route('documentos.index')->with('success', 'Documento eliminado con éxito.');

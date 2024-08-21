@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Documentos extends Model
 {
     protected $table = 'documentos';
-    protected $primaryKey = 'documentos_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'doc_tipo',

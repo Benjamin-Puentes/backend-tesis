@@ -30,6 +30,6 @@ class Disponibilidad extends Model
     
     public function discos()
     {
-        return $this->hasMany(disco_duro::class, 'disponibilidad_id');
+        return $this->hasMany(discoduro::class, 'disponibilidad_id');
     }
 }

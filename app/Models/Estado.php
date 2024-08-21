@@ -29,6 +29,6 @@ class Estado extends Model
 
     public function discos()
     {
-        return $this->hasMany(disco_duro::class, 'estado_id');
+        return $this->hasMany(discoduro::class, 'estado_id');
     }
 }

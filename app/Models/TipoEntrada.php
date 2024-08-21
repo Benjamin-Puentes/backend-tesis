@@ -24,6 +24,6 @@ class TipoEntrada extends Model
 
     public function discos()
     {
-        return $this->hasMany(disco_duro::class, 'tipo_entrada_id');
+        return $this->hasMany(discoduro::class, 'tipo_entrada_id');
     }
 }

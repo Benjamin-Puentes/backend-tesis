@@ -47,7 +47,7 @@ class Ventas extends Model
 
     public function discos()
     {
-        return $this->belongsToMany(Disco_Duro::class, 'disco_duro_venta', 'venta_id', 'disco_duro_id');
+        return $this->belongsToMany(DiscoDuro::class, 'disco_duro_venta', 'venta_id', 'disco_duro_id');
     }
 
     // Relaciones uno a muchos inversas

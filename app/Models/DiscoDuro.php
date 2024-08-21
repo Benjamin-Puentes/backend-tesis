@@ -30,7 +30,7 @@ class DiscoDuro extends Model
 
     public function archivos()
     {
-        return $this->belongsTo(sistema_archivos::class);
+        return $this->belongsTo(sistemaarchivos::class);
     }
 
     public function entrada()

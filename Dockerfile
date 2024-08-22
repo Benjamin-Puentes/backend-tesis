@@ -22,7 +22,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html
 
 # Establece los permisos correctos
-RUN chown -R www-data:www-data /var/www/html/
+RUN chown -R www-data:www-data /var/www/html/bootstrap /var/www/html/vendor /var/www/html/storage
 
 # Habilita el módulo de reescritura de Apache
 RUN a2enmod rewrite

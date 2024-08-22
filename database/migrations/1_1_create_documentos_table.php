@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('doc_monto', 15, 2);
             $table->string('doc_archivo')->nullable();
         });
+
     }
 
     public function down()

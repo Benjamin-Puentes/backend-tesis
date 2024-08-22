@@ -10,15 +10,15 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
+	    $table->unsignedBigInteger('id_documentos');
             $table->timestamps();
             $table->string('detalles');
             $table->date('compra_fecha');
-            $table->unsignedBigInteger('id_documentos');
 
-            $table->foreign('id_documentos')->references('id')->on('documentos');
+            $table->foreign('id_documentos')->references('id')->on('documentos')->onDelete('cascade');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('compras');

@@ -6,6 +6,15 @@
     <form action="{{ route('documentos.update', ['documento' => $documento->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+	@if ($errors->any())
+	    <div class="alert alert-danger">
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	@endif
         <div class="form-group">
             <label for="tipo">Tipo</label>
             <input type="text" class="form-control" id="tipo" name="doc_tipo" value="{{ $documento->doc_tipo }}" required>
@@ -22,6 +31,12 @@
             <label for="monto">Monto</label>
             <input type="number" class="form-control" id="doc_monto" name="doc_monto" value="{{ $documento->doc_monto }}" required>
         </div>
+	@if ($documento->doc_archivo)
+	    <div class="form-group">
+	        <label>Archivo Actual:</label>
+	        <a href="{{ Storage::url($documento->doc_archivo) }}" target="_blank">{{ basename($documento->doc_archivo) }}</a>
+	    </div>
+	@endif
         <div class="form-group">
             <label for="doc_archivo">Archivo</label>
             <input type="file" class="form-control" id="doc_archivo" name="doc_archivo">

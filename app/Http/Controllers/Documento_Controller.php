@@ -13,23 +13,26 @@ class Documento_Controller extends Controller
 {
     public function index(Request $request)
     {
-        $tipos = Documentos::pluck('doc_tipo')->unique();
         $query = Documentos::query();
 
-        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
-            $query->whereBetween('doc_fecha', [$request->input('fecha_inicio'), $request->input('fecha_fin')]);
-        }
+    // Aplicar filtro por fechas
+    if ($request->filled('fecha_inicio') && $request->filled('fecha_fin')) {
+        $query->whereBetween('doc_fecha', [$request->input('fecha_inicio'), $request->input('fecha_fin')]);
+    } elseif ($request->filled('fecha_inicio')) {
+        $query->where('doc_fecha', '>=', $request->input('fecha_inicio'));
+    } elseif ($request->filled('fecha_fin')) {
+        $query->where('doc_fecha', '<=', $request->input('fecha_fin'));
+    }
 
-        if ($request->has('doc_tipo')) {
-            $query->where('doc_tipo', $request->input('doc_tipo'));
-        }
+    // Aplicar filtro por tipo de documento
+    if ($request->filled('doc_tipo')) {
+        $query->where('doc_tipo', $request->input('doc_tipo'));
+    }
 
-        $documentos = $query->get();
+    $documentos = $query->get();
+    $tipos = Documentos::pluck('doc_tipo')->unique();
 
-        // Obtener los tipos únicos de documentos para el filtro
-
-        //dd($documentos);
-        return view('documentos.index', compact('documentos', 'tipos'));
+    return view('documentos.index', compact('documentos', 'tipos'));
     }
 
 
@@ -91,13 +94,16 @@ class Documento_Controller extends Controller
             'doc_archivo' => 'nullable|file|mimes:pdf,doc,docx,csv,xlsx',
         ]);
 
-        if ($request->hasFile('archivo')) {
+	if ($documento->archivo && $request->hasFile('doc_archivo')) {
             Storage::delete($documento->archivo);
+	}
+
+        if ($request->hasFile('doc_archivo')) {
             $archivo = $request->file('doc_archivo')->store('documentos');
-            $documento->archivo = $archivo;
+            $documento->doc_archivo = $archivo;
         }
 
-        $documento->update($request->except('archivo'));
+        $documento->update($request->except('doc_archivo'));
 
         return redirect()->route('documentos.index')->with('success', 'Documento actualizado con éxito.');
     }
@@ -108,7 +114,7 @@ class Documento_Controller extends Controller
             Storage::delete($documento->doc_archivo);
         }
         $documento->delete();
-        
+
         return redirect()->route('documentos.index')->with('success', 'Documento eliminado con éxito.');
     }
 
